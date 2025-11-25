@@ -1,4 +1,4 @@
-module github.com/mmsgi-library/mmsgi-starter-kit
+module github.com/imamdwicaksono/mmsgi-starter-kit-golang
 
 go 1.21
 

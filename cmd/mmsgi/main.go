@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/mmsgi-library/mmsgi-starter-kit/internal/generators"
+	"github.com/imamdwicaksono/mmsgi-starter-kit-golang/internal/generators"
 	"github.com/spf13/cobra"
 )
 
