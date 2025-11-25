@@ -1,0 +1,13 @@
+var mainGoTemplate = `package main
+
+import (
+    "log"
+    "net/http"
+    "{{PROJECT}}/internal/routes"
+)
+
+func main() {
+    router := routes.SetupRouter()
+    log.Println("Server running at :8080")
+    http.ListenAndServe(":8080", router)
+}`

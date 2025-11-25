@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{block "title" .}}MMSGI Admin{{end}}</title>
+    <link rel="stylesheet" href="/assets/css/style.css">
+</head>
+<body>
+    <nav class="navbar">
+        <a href="/">Dashboard</a>
+        <a href="/about">About</a>
+    </nav>
+
+    <main>
+        {{block "content" .}}{{end}}
+    </main>
+
+    <script src="/assets/js/app.js"></script>
+</body>
+</html>

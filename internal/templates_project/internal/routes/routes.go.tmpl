@@ -1,0 +1,17 @@
+var routesTemplate = `package routes
+
+import (
+    "github.com/go-chi/chi/v5"
+    "{{PROJECT}}/internal/controllers"
+    "{{PROJECT}}/internal/middlewares"
+)
+
+func SetupRouter() *chi.Mux {
+    r := chi.NewRouter()
+    r.Use(middlewares.Logger)
+
+    r.Get("/", controllers.HomeIndex)
+    r.Get("/about", controllers.AboutIndex)
+
+    return r
+}`

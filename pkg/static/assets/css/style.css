@@ -1,0 +1,16 @@
+body {
+    margin: 0;
+    font-family: Arial;
+    background: #f4f4f4;
+}
+
+.navbar {
+    background: #333;
+    padding: 15px;
+}
+
+.navbar a {
+    color: #fff;
+    margin-right: 10px;
+    text-decoration: none;
+}

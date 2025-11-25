@@ -1,0 +1,14 @@
+var homeTemplate = `package controllers
+
+import (
+    "net/http"
+    "github.com/mmsgi-library/mmsgi-starter-kit/pkg/templates"
+)
+
+func HomeIndex(w http.ResponseWriter, r *http.Request) {
+    templates.Render(w, "dashboard.html", nil)
+}
+
+func AboutIndex(w http.ResponseWriter, r *http.Request) {
+    templates.Render(w, "about.html", nil)
+}`
