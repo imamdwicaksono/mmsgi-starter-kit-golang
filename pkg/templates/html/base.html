@@ -1,19 +1,19 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>{{block "title" .}}MMSGI Admin{{end}}</title>
-    <link rel="stylesheet" href="/assets/css/style.css">
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>{{block "title" .}}MMSGI Admin{{end}}</title>
+  <link rel="stylesheet" href="/assets/css/style.css">
 </head>
 <body>
-    <nav class="navbar">
-        <a href="/">Dashboard</a>
-        <a href="/about">About</a>
-    </nav>
-
-    <main>
-        {{block "content" .}}{{end}}
-    </main>
-
-    <script src="/assets/js/app.js"></script>
+<nav class="navbar">
+  <a href="/">Dashboard</a> |
+  <a href="/about">About</a>
+</nav>
+<main class="container">
+  {{block "content" .}}{{end}}
+</main>
+<script src="/assets/js/app.js"></script>
 </body>
 </html>

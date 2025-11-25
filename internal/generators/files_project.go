@@ -1,5 +1,6 @@
 package generators
 
+// TemplateFiles maps target path -> template content key (replaced later)
 var TemplateFiles = map[string]string{
 	"go.mod":                         "module {{PROJECT}}\n\ngo 1.21\n",
 	"cmd/server/main.go":             "{{MAIN_GO}}",

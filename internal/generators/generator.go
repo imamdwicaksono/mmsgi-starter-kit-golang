@@ -3,33 +3,49 @@ package generators
 import (
 	"fmt"
 	"os"
+	"path/filepath"
 )
 
-func GenerateProject(name string) error {
-	fmt.Println("Generating project:", name)
+func GenerateProject(name string, opts GenerateOptions) error {
+	fmt.Println("→ Creating project:", name)
 
-	// create folders
-	folders := []string{
+	paths := []string{
 		name,
-		name + "/cmd/server",
-		name + "/internal/controllers",
-		name + "/internal/routes",
-		name + "/internal/middlewares",
-		name + "/views",
-		name + "/public/css",
-		name + "/public/js",
+		filepath.Join(name, "cmd", "server"),
+		filepath.Join(name, "internal", "controllers"),
+		filepath.Join(name, "internal", "routes"),
+		filepath.Join(name, "internal", "middlewares"),
+		filepath.Join(name, "views"),
+		filepath.Join(name, "public", "css"),
+		filepath.Join(name, "public", "js"),
 	}
 
-	for _, f := range folders {
-		if err := os.MkdirAll(f, 0755); err != nil {
+	// extra if API/CRUD/Auth
+	if opts.UseAPI || opts.UseCRUD {
+		paths = append(paths, filepath.Join(name, "internal", "models"))
+	}
+	if opts.UseAuth {
+		paths = append(paths, filepath.Join(name, "internal", "auth"))
+	}
+
+	for _, p := range paths {
+		if err := os.MkdirAll(p, 0755); err != nil {
 			return err
 		}
 	}
 
-	// copy template files
-	if err := CopyProjectFiles(name); err != nil {
+	fmt.Println("→ Writing files...")
+	if err := CopyProjectFiles(name, opts); err != nil {
 		return err
 	}
 
+	// create example CRUD if requested
+	if opts.UseCRUD {
+		if err := generateExampleCRUD(name); err != nil {
+			return err
+		}
+	}
+
+	fmt.Println("✔ Done!")
 	return nil
 }

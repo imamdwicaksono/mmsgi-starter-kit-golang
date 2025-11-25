@@ -1,0 +1,19 @@
+package middlewares
+
+import (
+	"net/http"
+)
+
+const sessionCookieName = "mmsgi_session"
+
+func Auth(next http.Handler) http.Handler {
+	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		cookie, err := r.Cookie(sessionCookieName)
+		if err != nil || cookie.Value == "" {
+			http.Redirect(w, r, "/login", http.StatusSeeOther)
+			return
+		}
+		// session validation stub (in real project: check DB or memstore)
+		next.ServeHTTP(w, r)
+	})
+}

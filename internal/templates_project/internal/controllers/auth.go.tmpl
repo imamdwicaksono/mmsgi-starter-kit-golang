@@ -1,0 +1,39 @@
+package controllers
+
+import (
+	"net/http"
+	"time"
+)
+
+func LoginForm(w http.ResponseWriter, r *http.Request) {
+	templates.Render(w, "login.html", nil)
+}
+
+func LoginPost(w http.ResponseWriter, r *http.Request) {
+	_ = r.ParseForm()
+	username := r.FormValue("username")
+	password := r.FormValue("password")
+
+	// hardcoded example: username: admin, password: secret
+	if username == "admin" && password == "secret" {
+		http.SetCookie(w, &http.Cookie{
+			Name:    "mmsgi_session",
+			Value:   "valid-session-token",
+			Expires: time.Now().Add(24 * time.Hour),
+			Path:    "/",
+		})
+		http.Redirect(w, r, "/", http.StatusSeeOther)
+		return
+	}
+	http.Redirect(w, r, "/login", http.StatusSeeOther)
+}
+
+func Logout(w http.ResponseWriter, r *http.Request) {
+	http.SetCookie(w, &http.Cookie{
+		Name:   "mmsgi_session",
+		Value:  "",
+		MaxAge: -1,
+		Path:   "/",
+	})
+	http.Redirect(w, r, "/login", http.StatusSeeOther)
+}
